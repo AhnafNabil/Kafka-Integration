@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  order-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./app:/app/app
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+    networks:
+      - order-network
+      - microservice-network
+
+  mongodb:
+    image: mongo:5.0
+    ports:
+      - "27018:27017"  # Map to a different port to avoid conflict with product service
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - order-network
+
+networks:
+  order-network:
+    driver: bridge
+  microservice-network:
+    external: true  # Connect to the existing microservice network
+
+volumes:
+  mongodb_data:

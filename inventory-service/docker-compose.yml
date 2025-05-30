@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  inventory-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./app:/app/app
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    networks:
+      - inventory-network
+      - microservice-network
+
+  postgres:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=inventory_db
+    networks:
+      - inventory-network
+
+networks:
+  inventory-network:
+    driver: bridge
+  microservice-network:
+    external: true  # Connect to the existing microservice network
+
+volumes:
+  postgres_data:

@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  user-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8003"
+    volumes:
+      - ./app:/app/app
+    env_file:
+      - .env
+    depends_on:
+      - postgres-user
+    networks:
+      - user-network
+      - microservice-network
+
+  postgres-user:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=user_db
+    ports:
+      - "5433:5432"  # Use a different port to avoid conflicts
+    volumes:
+      - postgres_user_data:/var/lib/postgresql/data
+    networks:
+      - user-network
+
+networks:
+  user-network:
+    driver: bridge
+  microservice-network:
+    external: true  # Connect to the existing microservice network
+
+volumes:
+  postgres_user_data:
