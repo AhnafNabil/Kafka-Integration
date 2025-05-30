@@ -3,6 +3,7 @@ import logging
 from typing import Dict, Any
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy import select, text  # Added text import
 from datetime import datetime
 
 from app.core.config import settings
@@ -112,9 +113,9 @@ class InventoryEventConsumer:
             # Create inventory item
             async with AsyncSessionLocal() as db:
                 try:
-                    # Check if inventory already exists (idempotency)
+                    # FIXED: Check if inventory already exists using proper SQLAlchemy syntax
                     result = await db.execute(
-                        f"SELECT id FROM inventory_items WHERE product_id = '{product_id}'"
+                        select(InventoryItem.id).where(InventoryItem.product_id == product_id)
                     )
                     if result.scalar():
                         logger.info(f"Inventory for product {product_id} already exists, skipping")

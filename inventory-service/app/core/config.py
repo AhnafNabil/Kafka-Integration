@@ -17,8 +17,8 @@ class Settings(BaseSettings):
     INVENTORY_RESERVED_QUEUE: str = "inventory_reserved"
     INVENTORY_FAILED_QUEUE: str = "inventory_failed"
     
-    # Kafka settings
-    KAFKA_BOOTSTRAP_SERVERS: str = "localhost:9092"
+    # Kafka settings - FIXED: Use Docker-friendly default
+    KAFKA_BOOTSTRAP_SERVERS: str = "kafka:29092"  # Changed from localhost:9092
     KAFKA_CLIENT_ID: str = "inventory-service"
     KAFKA_CONSUMER_GROUP: str = "inventory-consumer-group"
     

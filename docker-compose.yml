@@ -28,7 +28,7 @@ services:
       - "8000:8000"
     environment:
       - INVENTORY_SERVICE_URL=http://inventory-service:8002/api/v1
-      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:29092  # FIXED: Use internal port
     env_file:
       - ./product-service/.env
     depends_on:
@@ -116,7 +116,9 @@ services:
       - DATABASE_URL=postgresql://postgres:postgres@postgres-inventory:5432/inventory_db
       - REDIS_URL=redis://redis:6379/0
       - NOTIFICATION_CHANNEL=inventory:low-stock
-      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:29092  # FIXED: Use internal port
+      - KAFKA_CLIENT_ID=inventory-service     # ADDED: Explicit client ID
+      - KAFKA_CONSUMER_GROUP=inventory-consumer-group  # ADDED: Explicit consumer group
     env_file:
       - ./inventory-service/.env
     depends_on:
@@ -338,7 +340,7 @@ services:
       - "8082:8080"
     environment:
       KAFKA_CLUSTERS_0_NAME: local
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092  # This was already correct
       KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
     networks:
       - microservice-network

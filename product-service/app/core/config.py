@@ -13,8 +13,8 @@ class Settings(BaseSettings):
     MONGODB_URI: str = "mongodb://localhost:27017"
     MONGODB_DB: str = "product_db"
     
-    # Kafka settings
-    KAFKA_BOOTSTRAP_SERVERS: str = "localhost:9092"
+    # Kafka settings - FIXED: Use Docker-friendly default
+    KAFKA_BOOTSTRAP_SERVERS: str = "kafka:29092"  # Changed from localhost:9092
     KAFKA_CLIENT_ID: str = "product-service"
     
     # JWT Auth settings (for testing/development)
