@@ -767,29 +767,9 @@ The Kafka integration enables **asynchronous communication** between Product and
 
 ![alt text](./images/Kafka-integration.svg)
 
-## Testing Procedures
+## Testing Procedures for Kafka Integration
 
-### 1. System Initialization
-
-- Start the complete microservices ecosystem:
-
-    ```bash
-    docker-compose up --build -d
-    ```
-
-- Verify all services are running:
-
-    ```bash
-    docker-compose ps -a
-    ```
-
-- Install `jq` to parse JSON in bash:
-
-    ```bash
-    apt-get update && apt-get install -y jq
-    ```
-
-### 2. Basic Event Flow Testing
+### 1. Basic Event Flow Testing
 
 Test the core Kafka integration with a new product:
 
@@ -817,7 +797,7 @@ curl -X POST "http://localhost/api/v1/products/" \
 }
 ```
 
-### 3. Event Processing Verification
+### 2. Event Processing Verification
 
 Verify the event was processed and inventory was created:
 
@@ -848,7 +828,7 @@ Verify the event was processed and inventory was created:
     }
     ```
 
-### 4. Kafka Infrastructure Verification
+### 3. Kafka Infrastructure Verification
 
 Verify Kafka is running and topics are available:
 
@@ -863,7 +843,7 @@ product.events
 inventory.events
 ```
 
-### 5. Event Message Inspection
+### 4. Event Message Inspection
 
 Examine the actual Kafka messages to verify event structure:
 
@@ -902,7 +882,7 @@ docker-compose exec kafka kafka-console-consumer \
 }
 ```
 
-### 6. Kafka UI Monitoring
+### 5. Kafka UI Monitoring
 
 Access the Kafka UI for visual monitoring:
 
@@ -914,7 +894,7 @@ Navigate to:
 - **Topics** → `product.events` → View messages
 - **Consumer Groups** → `inventory-consumer-group` → Monitor lag
 
-### 7. Service Decoupling Test
+### 6. Service Decoupling Test
 
 Test that services can operate independently:
 
@@ -944,7 +924,7 @@ Test that services can operate independently:
     - Event should be queued in Kafka
     - No inventory record should exist yet
 
-### 8. Event Replay and Recovery
+### 7. Event Replay and Recovery
 
 Test event processing after service recovery:
 
@@ -971,7 +951,7 @@ Test event processing after service recovery:
     **Expected Output:**
     Inventory should be created automatically once the service restarts and processes the queued event.
 
-### 9. Consumer Group Analysis
+### 8. Consumer Group Analysis
 
 Monitor Kafka consumer group status:
 
@@ -985,7 +965,7 @@ docker-compose exec kafka kafka-consumer-groups \
 **Expected Output:**
 ```
 GROUP                    TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG
-inventory-consumer-group product.events  0          2               2               0
+inventory-consumer-group product.events  0          6               6               0
 ```
 
 - **LAG = 0**: All messages processed
