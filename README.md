@@ -10,13 +10,9 @@ The Kafka integration enables **asynchronous communication** between Product and
 - **Resilience**: Events are queued and processed even when services are temporarily unavailable
 - **Scalability**: Multiple consumers can process events in parallel
 
-## Test Architecture
+## Kafka Integration Architecture
 
-```
-Product Service → Kafka Topic (product.events) → Inventory Service
-     ↓                    ↓                           ↓
-  MongoDB            Event Storage              PostgreSQL
-```
+![alt text](./images/Kafka-integration.svg)
 
 ## Testing Procedures
 
