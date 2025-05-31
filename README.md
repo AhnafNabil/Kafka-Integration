@@ -10,10 +10,19 @@ In this documentation, we will test 3 different scenarios:
 
 ## The Setup
 
-Run the application using docker compose:
+Clone the repository:
 
 ```bash
 git clone https://github.com/poridhioss/E-commerce-Microservices-with-Kafka.git
+```
+
+>**Note:** you have to change env variables of the notification service in order to test mail notifications. Here, we used `mailtrap.io` to test the mail notifications. So, create a free account on `mailtrap.io` and change the env variables in the `notification-service/.env` file. 
+
+You have to change the `MAIL_USERNAME`, `MAIL_PASSWORD` variables in the `.env` file of the `notification-service` folder. You will get these credentials from `mailtrap.io` sandbox.
+
+Run the application using docker compose:
+
+```bash
 docker-compose up --build -d
 ```
 
@@ -25,6 +34,15 @@ This will start all services including:
 - User Service (PostgreSQL)
 - RabbitMQ Message Broker
 - Nginx API Gateway
+- Redis
+- Kafka
+- Notification Service (PostgreSQL)
+
+verify that all services are running:
+
+```bash
+docker-compose ps -a
+```
 
 Install `jq` to make JSON output more readable in the terminal:
 
