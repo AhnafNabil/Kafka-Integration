@@ -111,7 +111,7 @@ docker-compose exec kafka kafka-topics --bootstrap-server localhost:9092 --list
 ```
 __consumer_offsets
 product.events
-consumer.events
+inventory.events
 ```
 
 ### 5. Event Message Inspection
