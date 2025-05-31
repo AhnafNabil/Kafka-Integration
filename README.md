@@ -13,6 +13,7 @@ In this documentation, we will test 3 different scenarios:
 Run the application using docker compose:
 
 ```bash
+git clone https://github.com/poridhioss/E-commerce-Microservices-with-Kafka.git
 docker-compose up --build -d
 ```
 
