@@ -35,9 +35,9 @@ apt-get update && apt-get install -y jq
 
 In this documentation, we will describe the entire testing procedure through a story or scenario that could occur in a real-world setting.
 
-![alt text](./images/rabbitmq-01.svg)
+![alt text](https://raw.githubusercontent.com/poridhiEng/lab-asset/cebdaf0c344e65f11223da2f920bcbe67e1baf7e/E-commerce-with-kafka/images/rabbitmq-01.svg)
 
-![alt text](./images/rabbitmq-02.svg)
+![alt text](https://raw.githubusercontent.com/poridhiEng/lab-asset/cebdaf0c344e65f11223da2f920bcbe67e1baf7e/E-commerce-with-kafka/images/rabbitmq-02.svg)
 
 **RabbitMQ Dashboard**: Open http://localhost:15672 (guest/guest) to watch our message queues in action.
 
@@ -350,7 +350,7 @@ curl -s -u guest:guest http://localhost:15672/api/queues/%2F/order_created | \
   jq '{messages_waiting: .messages, consumers: .consumers}'
 ```
 
-![alt text](./images/image-00.png)
+![alt text](https://raw.githubusercontent.com/poridhiEng/lab-asset/cebdaf0c344e65f11223da2f920bcbe67e1baf7e/E-commerce-with-kafka/images/image-00.png)
 
 ### Customer Tries to Cancel During Outage
 
@@ -366,7 +366,7 @@ curl -s -u guest:guest http://localhost:15672/api/queues/%2F/inventory_release |
   jq '{messages_waiting: .messages}'
 ```
 
-![alt text](./images/image-01.png)
+![alt text](https://raw.githubusercontent.com/poridhiEng/lab-asset/cebdaf0c344e65f11223da2f920bcbe67e1baf7e/E-commerce-with-kafka/images/image-01.png)
 
 ### Service Recovery
 
@@ -381,7 +381,7 @@ curl -s -u guest:guest http://localhost:15672/api/queues | \
   jq '.[] | select(.name | contains("order") or contains("inventory")) | {name: .name, messages_waiting: .messages}'
 ```
 
-![alt text](./images/image-02.png)
+![alt text](https://raw.githubusercontent.com/poridhiEng/lab-asset/cebdaf0c344e65f11223da2f920bcbe67e1baf7e/E-commerce-with-kafka/images/image-02.png)
 
 Verify order was processed and then cancelled:
 ```bash
@@ -446,7 +446,7 @@ This comprehensive guide will walk you through testing the **E-commerce Notifica
 
 ## System Architecture
 
-![alt text](./images/Notification-service.svg)
+![alt text](https://raw.githubusercontent.com/poridhiEng/lab-asset/cebdaf0c344e65f11223da2f920bcbe67e1baf7e/E-commerce-with-kafka/images/Notification-service.svg)
 
 
 ## Testing Scenarios
@@ -484,7 +484,7 @@ curl -X POST "http://localhost/api/v1/notifications/test" | jq .
 - Email appears in Mailtrap inbox
 - Subject: "Test Notification"
 
-![alt text](./images/image.png)
+![alt text](https://raw.githubusercontent.com/poridhiEng/lab-asset/cebdaf0c344e65f11223da2f920bcbe67e1baf7e/E-commerce-with-kafka/images/image.png)
 
 ### Scenario 2: Product Creation Flow
 
@@ -563,7 +563,7 @@ curl -X POST "http://localhost/api/v1/notifications/test" | jq .
     curl -s "http://localhost/api/v1/notifications/?limit=3" | jq '.[0]'
     ```
 
-    ![alt text](./images/image-1.png)
+    ![alt text](https://raw.githubusercontent.com/poridhiEng/lab-asset/cebdaf0c344e65f11223da2f920bcbe67e1baf7e/E-commerce-with-kafka/images/image-1.png)
 
 **Success Flow**:
 - Inventory updated successfully
@@ -577,7 +577,7 @@ curl -X POST "http://localhost/api/v1/notifications/test" | jq .
 - Subject: "Low Stock Alert: Smart Watch"
 - Product details with current quantity (3) and threshold (8)
 
-![alt text](./images/image-2.png)
+![alt text](https://raw.githubusercontent.com/poridhiEng/lab-asset/cebdaf0c344e65f11223da2f920bcbe67e1baf7e/E-commerce-with-kafka/images/image-2.png)
 
 ### Scenario 4: Order-Triggered Notification Flow
 **Purpose**: Test complete e-commerce workflow from order to notification
@@ -689,11 +689,11 @@ curl -X POST "http://localhost/api/v1/notifications/test" | jq .
       jq '.[] | select(.type=="low_stock") | {id, subject, status, created_at}'
     ```
 
-    ![alt text](./images/image-3.png)
+    ![alt text](https://raw.githubusercontent.com/poridhiEng/lab-asset/cebdaf0c344e65f11223da2f920bcbe67e1baf7e/E-commerce-with-kafka/images/image-3.png)
 
 10. Check Email Notifications:
 
-    ![alt text](./images/image-4.png)
+    ![alt text](https://raw.githubusercontent.com/poridhiEng/lab-asset/cebdaf0c344e65f11223da2f920bcbe67e1baf7e/E-commerce-with-kafka/images/image-4.png)
 
     
 
@@ -749,7 +749,7 @@ curl -X POST "http://localhost/api/v1/notifications/test" | jq .
 - Notification appears in database
 - Email sent to admin
 
-![alt text](./images/image-5.png)
+![alt text](https://raw.githubusercontent.com/poridhiEng/lab-asset/cebdaf0c344e65f11223da2f920bcbe67e1baf7e/E-commerce-with-kafka/images/image-5.png)
 
 # Kafka Testing Workflow Documentation
 
@@ -765,7 +765,7 @@ The Kafka integration enables **asynchronous communication** between Product and
 
 ## Kafka Integration Architecture
 
-![alt text](./images/Kafka-integration.svg)
+![alt text](https://raw.githubusercontent.com/poridhiEng/lab-asset/cebdaf0c344e65f11223da2f920bcbe67e1baf7e/E-commerce-with-kafka/images/Kafka-integration.svg)
 
 ## Testing Procedures for Kafka Integration
 
