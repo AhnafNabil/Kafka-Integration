@@ -1,6 +1,12 @@
 # E-commerce Microservices: A Testing Scenario
 
-Welcome to **E-commerce Site**, a modern e-commerce platform built with microservices and RabbitMQ. This guide tells the story of how our system handles real-world scenarios - from busy shopping days to unexpected service outages.
+Welcome to **E-commerce Site**, a modern e-commerce platform built with microservices. This guide tells the story of how our system handles real-world scenarios - from busy shopping days to unexpected service outages.
+
+In this documentation, we will test 3 different scenarios:
+
+1. Order Processing Workflow with RabbitMQ
+2. Notification Service with Redis
+3. Kafka Integration
 
 ## The Setup
 
@@ -25,9 +31,13 @@ Install `jq` to make JSON output more readable in the terminal:
 apt-get update && apt-get install -y jq
 ```
 
-## Order Processing Workflow with RabbitMQ
+# Order Processing Workflow with RabbitMQ
 
 In this documentation, we will describe the entire testing procedure through a story or scenario that could occur in a real-world setting.
+
+![alt text](./images/rabbitmq-01.svg)
+
+![alt text](./images/rabbitmq-02.svg)
 
 **RabbitMQ Dashboard**: Open http://localhost:15672 (guest/guest) to watch our message queues in action.
 
